@@ -27,9 +27,12 @@ class SplitWatch(object):
     def dump(self):
         if self.mode == 'dev':
             self.split()
-            longest = max(map(len, [r[0] for r in self.times]))
-            if sort == True:
+            longest = max(map(len, [r[0] for r in self.times]+['No description']))
+            if self.sort == True:
                 self.times.sort(key = lambda x : x[0])
             for each in self.times:
-                print each[0].ljust(longest + 1)+': ' +str(each[1]) + 's'
+                if each[0] == '': # No description was given as an argument
+                    print 'No description'.ljust(longest + 1)+': ' +str(each[1]) + 's'
+                else:
+                    print each[0].ljust(longest + 1)+': ' +str(each[1]) + 's'
         else: pass

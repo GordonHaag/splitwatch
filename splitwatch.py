@@ -1,7 +1,7 @@
 import time
 
 class SplitWatch(object):
-    def __init__(self, mode = '', sorted = False):
+    def __init__(self, mode = '', sort = False):
         if mode == 'dev':
             self.init = time.time()
             self.start = None
@@ -9,6 +9,7 @@ class SplitWatch(object):
             self.times = []
             self.desc = ''
             self.mode = mode
+            self.sort = sort
         elif mode == '':
             self.mode = mode
 
@@ -27,7 +28,7 @@ class SplitWatch(object):
         if self.mode == 'dev':
             self.split()
             longest = max(map(len, [r[0] for r in self.times]))
-            if sorted == True:
+            if sort == True:
                 self.times.sort(key = lambda x : x[0])
             for each in self.times:
                 print each[0].ljust(longest + 1)+': ' +str(each[1]) + 's'
